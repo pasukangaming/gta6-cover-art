@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Sunset Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover editor">
+    <h1>Neon Sunset<br>Cover Studio</h1>
+    <p class="tagline">Turn any photo and caption into GTA-style poster art. Your photos never leave this machine.</p>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <div id="dropzone" class="dropzone" role="button" tabindex="0">
+        Drop photos here, or click to choose
+        <input id="photo" type="file" accept="image/*" multiple>
+      </div>
+      <div id="thumbs" class="thumbs" aria-label="Loaded photos"></div>
+      <p class="hint">Samples load automatically. Click a thumbnail to put that photo in the selected panel.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Layout &amp; panels</legend>
+      <div id="layouts" class="chips" aria-label="Panel layout"></div>
+      <div id="panelPicker" class="chips" aria-label="Select a panel to edit"></div>
+      <label>Photo in this panel
+        <select id="panelPhoto"></select>
+      </label>
+      <label>Zoom <span id="zoomVal">100%</span>
+        <input id="zoom" type="range" min="0.5" max="3" step="0.05" value="1">
+      </label>
+      <div class="row">
+        <label>Pan X
+          <input id="panX" type="range" min="-0.5" max="0.5" step="0.02" value="0">
+        </label>
+        <label>Pan Y
+          <input id="panY" type="range" min="-0.5" max="0.5" step="0.02" value="0">
+        </label>
+      </div>
+      <div class="row">
+        <button id="fitFill" type="button" class="secondary">Reset crop</button>
+        <button id="useSamePhoto" type="button" class="secondary">One photo, all panels</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Caption</legend>
+      <label>Caption
+        <input id="caption" type="text" maxlength="40" value="Sunset Heist">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" maxlength="40" value="Vice City · Leonida">
+      </label>
+      <div class="row">
+        <label>Size <span id="capSizeVal">11%</span>
+          <input id="capSize" type="range" min="5" max="20" step="0.5" value="11.5">
+        </label>
+        <label>Colour
+          <input id="capColor" type="color" value="#ffffff">
+        </label>
+      </div>
+      <div class="row">
+        <label>Position
+          <select id="capPos">
+            <option value="bottom" selected>Bottom</option>
+            <option value="center">Centre</option>
+            <option value="top">Top</option>
+          </select>
+        </label>
+        <label class="check"><input id="capOutline" type="checkbox" checked> Bold outline</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Grade &amp; finish</legend>
+      <div id="grades" class="chips" aria-label="Colour grade"></div>
+      <label>Grade strength <span id="gradeVal">85%</span>
+        <input id="gradeIntensity" type="range" min="0" max="100" step="5" value="85">
+      </label>
+      <div class="row checks">
+        <label class="check"><input id="halftone" type="checkbox" checked> Halftone</label>
+        <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
+        <label class="check"><input id="grain" type="checkbox" checked> Grain</label>
+        <label class="check"><input id="border" type="checkbox" checked> Poster border</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Export</legend>
+      <label>Size
+        <select id="exportSize">
+          <option value="1080x1080" selected>1080 × 1080 — square post</option>
+          <option value="1080x1350">1080 × 1350 — portrait post</option>
+          <option value="1920x1080">1920 × 1080 — widescreen</option>
+        </select>
+      </label>
+      <button id="export" type="button" class="primary">Export PNG</button>
+      <p id="status" role="status"></p>
+    </fieldset>
+  </section>
+  <section class="preview" aria-label="Live preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+    <p class="hint">Live preview — every change paints at once.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
